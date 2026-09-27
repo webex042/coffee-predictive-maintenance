@@ -1,0 +1,23 @@
+# Virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Large generated data is regenerated from the simulator, so we don't commit it.
+# (Comment the next two lines out if you WANT the CSV in git.)
+data/raw/*.csv
+data/processed/*.csv
+
+# Local editor / tooling (not part of the project)
+.claude/
+.pytest_cache/

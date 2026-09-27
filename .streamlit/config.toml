@@ -1,0 +1,11 @@
+# Streamlit base theme for the arcade dashboard.
+# This sets the *starting* colours so Streamlit's own chrome loads dark and
+# doesn't flash white before dashboard/theme.py injects the full arcade skin.
+# All the detailed styling lives in dashboard/theme.py.
+[theme]
+base = "dark"
+primaryColor = "#33e1ff"          # cyan  -> focus rings, sliders, active bits
+backgroundColor = "#0a0e27"       # deep navy "cabinet" background
+secondaryBackgroundColor = "#141a44"  # raised panels / sidebar
+textColor = "#eaf2ff"             # blue-white ink
+font = "sans serif"
