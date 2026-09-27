@@ -1,0 +1,27 @@
+# Core data + math
+numpy==2.1.3
+pandas==2.2.3
+
+# Machine learning
+scikit-learn==1.5.2
+xgboost==2.1.3
+
+# Explainability (SHAP for feature importance)
+shap==0.46.0
+
+# Plotting (used in notebooks and the dashboard)
+matplotlib==3.9.2
+seaborn==0.13.2
+plotly==5.24.1
+
+# Dashboard
+streamlit==1.40.2
+
+# Notebooks
+jupyter==1.1.1
+
+# Saving/loading the trained model
+joblib==1.4.2
+
+# Testing the feature functions
+pytest==8.3.3
