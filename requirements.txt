@@ -1,27 +1,21 @@
-# Core data + math
+# =============================================================================
+# requirements.txt  --  DEPLOYMENT dependencies (Vercel serverless function)
+# =============================================================================
+# This is the LEAN set the /api/predict function needs to load the trained
+# model bundle and score one snapshot. Nothing here is optional: numpy + scipy
+# + scikit-learn provide the model runtime, joblib unpickles the bundle.
+#
+# Versions are pinned to the exact ones the model was trained/serialised with,
+# so a load in production is byte-for-byte compatible (no unpickle warnings or
+# estimator-version mismatch).
+#
+# Deliberately EXCLUDED to stay well under Vercel's 250 MB function limit
+# (they are only needed for training / the Streamlit dashboard, see
+# requirements-dev.txt): pandas, xgboost, shap, streamlit, plotly, matplotlib,
+# seaborn, jupyter, pytest.
+# =============================================================================
+
 numpy==2.1.3
-pandas==2.2.3
-
-# Machine learning
+scipy==1.18.1
 scikit-learn==1.5.2
-xgboost==2.1.3
-
-# Explainability (SHAP for feature importance)
-shap==0.46.0
-
-# Plotting (used in notebooks and the dashboard)
-matplotlib==3.9.2
-seaborn==0.13.2
-plotly==5.24.1
-
-# Dashboard
-streamlit==1.40.2
-
-# Notebooks
-jupyter==1.1.1
-
-# Saving/loading the trained model
 joblib==1.4.2
-
-# Testing the feature functions
-pytest==8.3.3

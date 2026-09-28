@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coffee Line — Predictive Maintenance System</title>
+  <meta name="description"
+        content="Predictive-maintenance dashboard for a simulated coffee production line. Estimates the probability a machine fails within 24 operating hours using a trained ML model." />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#controls">Skip to controls</a>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand__mark" aria-hidden="true">☕</span>
+      <div class="brand__text">
+        <h1>Coffee Line</h1>
+        <p class="brand__subtitle">Predictive Maintenance System</p>
+      </div>
+    </div>
+    <div class="model-chip" id="model-chip" hidden>
+      <span class="model-chip__dot" aria-hidden="true"></span>
+      <span id="model-chip-text">model</span>
+    </div>
+  </header>
+
+  <p class="disclaimer" role="note">
+    Portfolio prototype on fully <strong>simulated</strong> data — not an official
+    Nestlé/NESCAFÉ system and uses no real branding or specifications.
+  </p>
+
+  <main class="layout">
+    <!-- ===== Controls: machine overview + sensor inputs ===== -->
+    <section class="panel" id="controls" aria-labelledby="controls-title">
+      <h2 id="controls-title" class="panel__title">Machine &amp; sensor input</h2>
+
+      <form id="predict-form" novalidate>
+        <div class="field">
+          <label for="machine_type">Machine</label>
+          <select id="machine_type" name="machine_type"></select>
+          <p class="field__hint" id="machine-overview">—</p>
+        </div>
+
+        <fieldset class="sensor-grid">
+          <legend>Sensor readings</legend>
+          <!-- sensor inputs injected by app.js -->
+        </fieldset>
+
+        <details class="advanced">
+          <summary>Advanced inputs (optional)</summary>
+          <div class="sensor-grid" id="advanced-grid"><!-- injected --></div>
+        </details>
+
+        <div class="actions">
+          <button type="submit" class="btn btn--primary" id="predict-btn">
+            Predict failure risk
+          </button>
+          <button type="button" class="btn btn--ghost" id="reset-btn">
+            Reset to healthy
+          </button>
+        </div>
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <!-- ===== Results ===== -->
+    <section class="panel results" id="results" aria-labelledby="results-title" aria-live="polite">
+      <h2 id="results-title" class="panel__title">Prediction</h2>
+
+      <!-- Empty state, shown before the first prediction -->
+      <div class="empty-state" id="empty-state">
+        <p class="empty-state__icon" aria-hidden="true">📈</p>
+        <p>Enter sensor readings and press <strong>Predict failure risk</strong>
+           to score the machine with the trained model.</p>
+      </div>
+
+      <!-- Result content, revealed after a prediction -->
+      <div id="result-content" hidden>
+        <div class="risk-banner" id="risk-banner">
+          <span class="risk-banner__label">Risk level</span>
+          <span class="risk-banner__value" id="risk-value">—</span>
+        </div>
+
+        <div class="gauges">
+          <figure class="gauge-card">
+            <figcaption>Failure probability (next 24h)</figcaption>
+            <div class="gauge-wrap">
+              <canvas id="prob-gauge" role="img"
+                      aria-label="Failure probability gauge"></canvas>
+              <span class="gauge-center" id="prob-center">—</span>
+            </div>
+            <p class="gauge-note" id="prob-note">—</p>
+          </figure>
+
+          <figure class="gauge-card">
+            <figcaption>Machine health score</figcaption>
+            <div class="gauge-wrap">
+              <canvas id="health-gauge" role="img"
+                      aria-label="Machine health score gauge"></canvas>
+              <span class="gauge-center" id="health-center">—</span>
+            </div>
+            <p class="gauge-note" id="health-note">—</p>
+          </figure>
+        </div>
+
+        <div class="recommendation" id="recommendation">
+          <h3>Recommendation</h3>
+          <p id="rec-text">—</p>
+        </div>
+
+        <figure class="chart-card">
+          <figcaption>Sensor deviation from a healthy machine (σ above/below normal)</figcaption>
+          <canvas id="sensor-chart" role="img"
+                  aria-label="Bar chart of sensor deviations"></canvas>
+        </figure>
+      </div>
+
+      <!-- Error state -->
+      <div class="result-error" id="result-error" role="alert" hidden></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built as an end-to-end ML engineering portfolio project · predictions from a
+       trained, calibrated model · synthetic data.</p>
+  </footer>
+
+  <!-- Chart.js (pinned) for the gauges and charts. Loaded from CDN; the
+       dashboard degrades gracefully to numeric readouts if it is unavailable. -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/app.js" defer></script>
+</body>
+</html>
