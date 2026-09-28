@@ -1,2 +1,3 @@
-# coffee-predictive-maintenance
-Predictive-maintenance ML on a simulated coffee production line: forecasts each machine's chance of failing within the next 24 operating hours, with a calibrated model, SHAP explanations, health scores, and a retro-arcade Streamlit dashboard. Portfolio prototype on fully simulated data — not affiliated with Nestlé/NESCAFÉ.
+
+<img width="1109" height="1325" alt="architecture" src="https://github.com/user-attachments/assets/0cd2b825-8750-4bb4-90ed-4b66da8eb5fb" />
+
